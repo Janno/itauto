@@ -1588,7 +1588,7 @@ let is_loaded_library d =
   let make_dir l = DirPath.make (List.rev_map Id.of_string l) in
   let dir = make_dir d in
   try
-    let (_ : Declarations.module_body) =
+    let _ =
       Global.lookup_module (ModPath.MPfile dir)
     in
     true
