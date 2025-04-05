@@ -1056,7 +1056,7 @@ module Theory = struct
       if debug () then
         Feedback.msg_debug
           Pp.(str "Goal " ++ Printer.pr_econstr_env env !sigma gl);
-      let _, pv, _, _ =
+      let _, pv, _, _, _ =
         Proofview.apply
           ~name:(Names.Id.of_string "unsat_core")
           ~poly:false env
@@ -1270,7 +1270,7 @@ let get_env = Proofview.Goal.enter_one (fun gl ->
 let dirty_clear ep (env, sigma) =
   let gl = Theory.constr_of_clause ep (Env.all_literals ep) in
   let (e,pv) = Proofview.init sigma [(env,gl)] in
-  let env,_,_,_ =  Proofview.apply
+  let env,_,_,_,_ =  Proofview.apply
                     ~name:(Names.Id.of_string "dirty_clear")
                     ~poly:false env
                     (Proofview.tclTHEN (Tactics.keep []) get_env)   pv in
