@@ -287,15 +287,15 @@ Lemma testbit_spec: forall k1 k2, (forall n, testbit k1 n = testbit k2 n) -> k1 
     rewrite bitE.
     rewrite sub_spec.
     rewrite lsl_spec.
-    replace (((φ (1)%uint63 * 2 ^ φ (n)%uint63)))%Z with
+    replace ((((φ 1)%uint63 * 2 ^ (φ n)%uint63)))%Z with
         (2 ^ (to_Z n))%Z by lia.
     unfold wB.
     rewrite power2_mod by (unfold size ; lia).
-    destruct ((φ (n)%uint63 <? Z.of_nat size)%Z) eqn:T.
+    destruct (((φ n)%uint63 <? Z.of_nat size)%Z) eqn:T.
     - unfold size in *.
       rewrite Z.mod_small.
-      replace ( 2 ^ φ (n)%uint63 - φ (1)%uint63)%Z
-        with (Z.pred (2 ^ φ (n)%uint63))%Z by lia.
+      replace ( 2 ^ (φ n)%uint63 - (φ 1)%uint63)%Z
+        with (Z.pred (2 ^ (φ n)%uint63))%Z by lia.
       rewrite <- Z.ones_equiv.
       rewrite Z.testbit_ones_nonneg by lia.
       destruct ((p <? n) && (p <? 63))%uint63 eqn:LT.
@@ -318,7 +318,7 @@ Lemma testbit_spec: forall k1 k2, (forall n, testbit k1 n = testbit k2 n) -> k1 
         lia.
       }
       rewrite Z_mod_nz_opp_full; rewrite Z.mod_small ; try lia.
-      replace ( 2 ^ Z.of_nat size - φ (1)%uint63)%Z
+      replace ( 2 ^ Z.of_nat size - (φ 1)%uint63)%Z
         with (Z.pred (2 ^ Z.of_nat size))%Z by lia.
       rewrite <- Z.ones_equiv.
       rewrite Z.testbit_ones_nonneg by lia.
@@ -540,9 +540,9 @@ Lemma testbit_spec: forall k1 k2, (forall n, testbit k1 n = testbit k2 n) -> k1 
     rewrite lsr_spec.
     rewrite add_spec.
     change (to_Z m + to_Z 1%uint63)%Z with (to_Z m + 1)%Z.
-    assert (B1 : (0 <= φ (1)%uint63 * 2 ^ φ (m)%uint63 < wB)%Z).
+    assert (B1 : (0 <= (φ 1)%uint63 * 2 ^ (φ m)%uint63 < wB)%Z).
     {
-      replace (φ (1)%uint63 * 2 ^ φ (m)%uint63)%Z with (2 ^ to_Z m)%Z by lia.
+      replace ((φ 1)%uint63 * 2 ^ (φ m)%uint63)%Z with (2 ^ to_Z m)%Z by lia.
       split.
       apply Z.pow_nonneg.
       lia.
@@ -551,18 +551,18 @@ Lemma testbit_spec: forall k1 k2, (forall n, testbit k1 n = testbit k2 n) -> k1 
       lia.
       lia.
     }
-    assert (B2 : (2^1 <= 2 ^ ((φ (m)%uint63 + 1)))%Z).
+    assert (B2 : (2^1 <= 2 ^ (((φ m)%uint63 + 1)))%Z).
     {
       apply Z.pow_le_mono_r.
       lia.
       lia.
     }
-    assert (B3 :  (0 <=  φ (k)%uint63 / 2 ^ ((φ (m)%uint63 + 1)))%Z).
+    assert (B3 :  (0 <=  (φ k)%uint63 / 2 ^ (((φ m)%uint63 + 1)))%Z).
     {
       nia.
     }
     assert (B4 :  (0 <=
-   φ (k)%uint63 / 2 ^ ((φ (m)%uint63 + 1) mod wB) * 2 ^ ((φ (m)%uint63 + 1) mod wB) <
+   (φ k)%uint63 / 2 ^ (((φ m)%uint63 + 1) mod wB) * 2 ^ (((φ m)%uint63 + 1) mod wB) <
    wB)%Z).
     {
       change (Z.of_nat size) with 63%Z in *.
@@ -584,8 +584,8 @@ Lemma testbit_spec: forall k1 k2, (forall n, testbit k1 n = testbit k2 n) -> k1 
       clear B4.
       unfold wB in *.
       change (Z.of_nat size) with 63%Z.
-      assert (φ (k)%uint63 / 2 ^ (φ (m)%uint63 + 1) * 2 ^ (φ (m)%uint63 + 1) =
-              to_Z k - to_Z k mod 2 ^ (φ (m)%uint63 + 1))%Z.
+      assert ((φ k)%uint63 / 2 ^ ((φ m)%uint63 + 1) * 2 ^ ((φ m)%uint63 + 1) =
+              to_Z k - to_Z k mod 2 ^ ((φ m)%uint63 + 1))%Z.
       nia.
       rewrite H.
       change (to_Z 1%uint63) with 1%Z.
@@ -645,10 +645,10 @@ Lemma testbit_spec: forall k1 k2, (forall n, testbit k1 n = testbit k2 n) -> k1 
       rewrite Z.mod_opp_l_nz.
       rewrite (Z.mod_small  (to_Z x)%Z).
       rewrite Z.mod_small.
-      rewrite <- (Z.opp_involutive  (wB - φ (x)%uint63 - φ (1)%uint63)).
+      rewrite <- (Z.opp_involutive  (wB - (φ x)%uint63 - (φ 1)%uint63)).
       rewrite Z.bits_opp.
       f_equal.
-      replace ((Z.pred (- (wB - φ (x)%uint63 - φ (1)%uint63))))%Z with
+      replace ((Z.pred (- (wB - (φ x)%uint63 - (φ 1)%uint63))))%Z with
           (to_Z x + (-1) * wB)%Z by lia.
       rewrite! testbit_0 by lia.
       replace (-1 * wB)%Z with ((2 * (-1 * 2^(62 - to_Z n))) * 2^(to_Z n))%Z.
@@ -700,16 +700,15 @@ Lemma testbit_spec: forall k1 k2, (forall n, testbit k1 n = testbit k2 n) -> k1 
   Definition bit_excl (x y: int) :=
     (forall n : int, bit x n = true -> bit y n = true -> False).
 
-
   Lemma lsl_1_spec : forall n,
       (n <? digits = true)%uint63 ->
-      (φ (1 << n)%uint63 = 2 ^ to_Z n)%Z.
+      ((φ (1 << n))%uint63 = 2 ^ to_Z n)%Z.
   Proof.
     intros.
     rewrite lsl_spec.
     rewrite Z.mod_small.
     lia.
-    replace (φ (1)%uint63 * 2 ^ φ (n)%uint63)%Z with
+    replace ((φ 1)%uint63 * 2 ^ (φ n)%uint63)%Z with
         (2^ to_Z n)%Z by lia.
     split.
     apply Z.pow_nonneg. lia.
@@ -729,7 +728,7 @@ Lemma testbit_spec: forall k1 k2, (forall n, testbit k1 n = testbit k2 n) -> k1 
     rewrite sub_spec.
     rewrite Z.mod_small.
     rewrite lsl_1_spec by auto.
-    replace (2 ^ φ (n)%uint63 - φ (1)%uint63)%Z with
+    replace (2 ^ (φ n)%uint63 - (φ 1)%uint63)%Z with
           (Z.pred (2 ^ (to_Z n)))%Z by lia.
     rewrite <- Z.ones_equiv.
     apply Z.testbit_ones_nonneg.
