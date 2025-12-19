@@ -1059,7 +1059,7 @@ module Theory = struct
       let _, pv, _, _, _ =
         Proofview.apply
           ~name:(Names.Id.of_string "unsat_core")
-          ~poly:false env
+          ~poly:PolyFlags.default env
           (Tacticals.tclTHENLIST
              [ dirty_intros cids
              ; Tacticals.tclCOMPLETE tac ])
@@ -1272,7 +1272,7 @@ let dirty_clear ep (env, sigma) =
   let (e,pv) = Proofview.init sigma [(env,gl)] in
   let env,_,_,_,_ =  Proofview.apply
                     ~name:(Names.Id.of_string "dirty_clear")
-                    ~poly:false env
+                    ~poly:PolyFlags.default env
                     (Proofview.tclTHEN (Tactics.keep []) get_env)   pv in
   env
 
