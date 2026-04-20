@@ -7167,7 +7167,6 @@ Lemma cnf_of_literal_correct : forall (m: hmap) g cp cm ar l
       (eval_result_state  (augment_hyp (is_classic o) l st) -> eval_ohformula o) ->
       (eval_state  st -> eval_literal l -> eval_ohformula o).
   Proof.
-    Proof.
       intros.
       apply eval_augment_cnf in H; auto.
       apply wf_insert_unit ; auto.
@@ -7255,7 +7254,6 @@ Lemma cnf_of_literal_correct : forall (m: hmap) g cp cm ar l
       (eval_annot_result_state  (augment_hyp (is_classic o) l st) -> eval_ohformula o) ->
       (eval_annot_state  st -> eval_literal l -> eval_ohformula o).
   Proof.
-    Proof.
       intros.
       apply eval_annot_augment_cnf in H; auto.
       apply wf_insert_unit ; auto.
