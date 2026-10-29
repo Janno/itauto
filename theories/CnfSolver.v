@@ -1,6 +1,4 @@
-Require Import ZArith.
-Require Import List Bool Lia.
-Require Import Morphisms.
+From Stdlib Require Import ZArith List Bool Lia Morphisms.
 Require Import Cdcl.Syntax Cdcl.Lib Cdcl.Lit Cdcl.Clause.
 
 Import Lit.

@@ -2,14 +2,13 @@
 
 Require Import  Cdcl.Formula.
 Require Export Cdcl.ReifClasses Cdcl.ZArithDec.
-Require Import Lia.
+From Stdlib Require Import Lia.
 
-Require Import List.
-Require Import Uint63.
+From Stdlib Require Import List Uint63.
 
 Declare ML Module "coq-itauto.plugin".
 Require Import Cdcl.Formula.
-Require Import Bool.
+From Stdlib Require Import Bool.
 
 Lemma Is_true_iff_eq_true : forall b, Is_true b <-> b = true.
 Proof.

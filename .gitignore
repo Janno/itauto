@@ -6,3 +6,7 @@ CoqMakefile*
 *.d
 _build
 META.coq-itauto
+_RocqProject
+src/prover.ml
+src/prover.mli
+src/proverPatch.ml

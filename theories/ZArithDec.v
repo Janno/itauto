@@ -2,7 +2,7 @@
 
 (** Teach itauto that comparisons over Z are decidable *)
 Require Import Cdcl.ReifClasses.
-Require Import Bool ZArith Lia.
+From Stdlib Require Import Bool ZArith Lia.
 Open Scope Z_scope.
 
 Lemma dec_le : forall x y, x <= y \/ ~ x <= y.

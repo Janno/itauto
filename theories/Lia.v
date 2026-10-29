@@ -1,6 +1,5 @@
 Require Export Cdcl.Itauto.
-From Coq Require Import Zify.
-From Coq Require Import Lia.
+From Stdlib Require Import Zify Lia.
 (** itauto is using the `classic` axiom if available *)
 #[export] Unset Itauto Use Implication Clauses.
 

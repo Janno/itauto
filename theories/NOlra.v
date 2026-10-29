@@ -1,6 +1,6 @@
 (* Copyright 2020 Frédéric Besson <frederic.besson@inria.fr> *)
 Require Import Cdcl.Itauto.
-Require Import ZifyClasses Lra Reals.
+From Stdlib Require Import ZifyClasses Lra Reals.
 
 Record RarithThy : Prop.
 

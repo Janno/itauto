@@ -1,0 +1,7 @@
+(rocq.theory
+ (name Cdcl)
+ (package coq-itauto)
+ (generate_project_file)
+ (modules :standard \ Prover Patricia Tac ZifyInt)
+ (plugins coq-itauto.plugin)
+ (theories Stdlib))

@@ -1,0 +1,16 @@
+(rocq.theory
+ (name ItautoIssues)
+ (modules :standard \ issue_0 issue_28 issue_31)
+ (theories Stdlib Cdcl))
+
+(alias
+ (name runtest)
+ (package coq-itauto)
+ (deps cnf.vo issue_2.vo issue_3.vo issue_5.vo issue_6.vo
+       issue_8.vo issue_9.vo issue_10.vo issue_11.vo issue_12.vo issue_13.vo
+       issue_14.vo issue_15.vo issue_16.vo issue_19.vo issue_20.vo issue_21.vo
+       issue_22.vo issue_23.vo issue_25.vo issue_cc.vo))
+
+; As in the old Makefile, issue_0 and issue_31 are exploratory examples,
+; not passing regression tests. issue_28 additionally requires MathComp
+; and mathcomp-zify, outside the standard-library-only test suite.

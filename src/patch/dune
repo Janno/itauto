@@ -1,7 +1,6 @@
 (executable
-	(name mlpatch)
-	(libraries str)
-	(promote (until-clean))
-)
+ (name mlpatch)
+ (libraries str))
+
 (ocamllex lexer)
 (ocamlyacc parser)

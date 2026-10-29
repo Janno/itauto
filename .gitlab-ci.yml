@@ -11,8 +11,10 @@ dev:
     - opam repo list
     - opam list
   script:
-    - make -j "$NJOBS"
-    - make install
+    - opam install . --deps-only --with-test -y
+    - dune build -j "$NJOBS" @install
+    - dune runtest -j "$NJOBS"
+    - dune install coq-itauto
   tags:
     - ci.inria.fr
     - medium

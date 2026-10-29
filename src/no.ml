@@ -53,7 +53,7 @@ module HConstr = struct
   module M = Map.Make (struct
     type t = EConstr.t
 
-    let compare c c' = Termops.ConstrData.compare (unsafe_to_constr c) (unsafe_to_constr c')
+    let compare c c' = Constr.compare (unsafe_to_constr c) (unsafe_to_constr c')
   end)
 
   include M

@@ -1,9 +1,9 @@
 (* Copyright 2020 Frédéric Besson <frederic.besson@inria.fr> *)
 
-Require Import Bool ZifyClasses ZifyUint63 ZArith Lia.
+From Stdlib Require Import Bool ZifyClasses ZifyUint63 ZArith Lia.
 Require Import Cdcl.PatriciaR.
 
-Require Uint63.
+From Stdlib Require Uint63.
 
 Section S.
   Import Uint63.

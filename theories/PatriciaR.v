@@ -2,7 +2,7 @@
   * Copyright 2020 Frédéric Besson <frederic.besson@inria.fr> adapted from functor to record
 *)
 
-Require Import List Bool ZArith Lia.
+From Stdlib Require Import List Bool ZArith Lia.
 
 Ltac inv H := inversion H ; try subst; clear H.
 Lemma Is_true_true : forall b, Is_true b <-> b = true.

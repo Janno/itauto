@@ -1,5 +1,5 @@
 (* Copyright 2020 Frédéric Besson <frederic.besson@inria.fr> *)
-Require Import Bool.
+From Stdlib Require Import Bool.
 
 Class DecP1 {A : Type} (P : A -> Prop) :=
   decP1 : forall x, P x \/ ~ P x.

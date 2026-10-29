@@ -1,7 +1,7 @@
 (* Copyright 2020 Frédéric Besson <frederic.besson@inria.fr> *)
 
-Require Extraction.
-Require Import Uint63.
+From Stdlib Require Extraction.
+From Stdlib Require Import Uint63.
 
 Extract Constant int => "Uint63.t".
 Extract Constant Uint63.ltb => "Uint63.lt".
@@ -20,6 +20,5 @@ Extract Inductive list => list [ "[]" "(::)" ].
 
 Require Import Cdcl.Formula.
 
-(* This extracts at the right place only if Pwd is itauto top-level
-directory *)
-Extraction "src/prover.ml" hcons_bprover LitSet.is_empty LitSet.fold LitSet.mem.
+Set Extraction Output Directory ".".
+Extraction "prover.ml" hcons_bprover LitSet.is_empty LitSet.fold LitSet.mem.

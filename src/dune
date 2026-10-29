@@ -1,0 +1,24 @@
+(rocq.extraction
+ (prelude prover)
+ (extracted_modules prover)
+ (theories Stdlib Cdcl))
+
+(rule
+ (target proverPatch.ml)
+ (deps prover.ml ppprover.ml)
+ (action
+  (with-stdout-to %{target}
+   (run %{exe:patch/mlpatch.exe} -ifile prover.ml -pfile ppprover.ml))))
+
+(library
+ (name cdcl_plugin)
+ (public_name coq-itauto.plugin)
+ (modules proverPatch cdcl no g_cdcl)
+ (flags :standard -w -3-9-27)
+ (libraries str rocq-runtime.plugins.ltac))
+
+(rocq.pp (modules g_cdcl))
+
+(executable
+ (name gen_form)
+ (modules gen_form))

@@ -1,10 +1,9 @@
 (* Copyright 2020 Frédéric Bessoyn <frederic.besson@inria.fr> *)
 Require Import Cdcl.PatriciaR Cdcl.KeyInt Cdcl.ReifClasses Cdcl.Lib.
-Require Import  Bool Setoid ZifyBool  ZArith Uint63 Lia List.
+From Stdlib Require Import Bool Setoid ZifyBool ZArith Uint63 Lia List.
 Require Import Cdcl.Syntax Cdcl.Clause.
 Import HCons.
-Require FMapAVL FMapFacts.
-Require OrderedTypeAlt.
+From Stdlib Require FMapAVL FMapFacts OrderedTypeAlt.
 Import ZifyClasses.
 
 Set Primitive Projections.

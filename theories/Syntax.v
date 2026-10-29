@@ -1,5 +1,5 @@
 (* Copyright 2023 Frédéric Besson <frederic.besson@inria.fr> *)
-Require Import Bool Uint63.
+From Stdlib Require Import Bool Uint63.
 
 Module HCons.
   (* The [HCons] module allows to tag a term with

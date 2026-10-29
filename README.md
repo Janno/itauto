@@ -71,20 +71,51 @@ opam install .
 
 ### Manual repository installation
 
-To manually build and install the development
-version of itauto, first install all dependencies:
+To manually build and install the development version, first install
+[Rocq](https://github.com/rocq-prover/rocq) 9.2 or later, its standard library,
+and [Dune](https://github.com/ocaml/dune) 3.22 or later. Then, in an independent
+checkout:
 
-- [Coq](https://github.com/coq/coq)
-- [dune](https://github.com/ocaml/dune)
-
-Then do:
-
+```shell
+dune build @install
+dune runtest
+dune install coq-itauto
 ```
-git clone https://gitlab.inria.fr/fbesson/itauto.git
-cd itauto
-make
-make install
+
+`make`, `make test`, and `make install` remain compatibility wrappers for Dune.
+The public imports (`Cdcl.Itauto`, `Cdcl.NOlia`, etc.) and OCaml plugin name
+(`coq-itauto.plugin`) are unchanged.
+
+### Composed workspace development
+
+Run Dune from the workspace root, using its toolchain environment:
+
+```shell
+direnv exec . dune build @vendored/itauto/all @vendored/itauto/install
+direnv exec . dune runtest vendored/itauto
 ```
+
+Dune builds the Rocq theories, extracts `src/prover.v`, applies the debugging
+patch using `src/patch/mlpatch.exe`, builds the OCaml plugin, and finally builds
+the tactic theories. All generated files stay in `_build`; neither a checked-in
+extraction nor `ocamlformat` is required. Standard-library imports are explicitly
+qualified so that the local `Cdcl.Lia` does not shadow `Stdlib.Lia`.
+
+The test target checks all eight files in `test-suite` and the standard-library
+regressions listed in the former Makefile. `issues/issue_28.v` needs the additional
+MathComp and mathcomp-zify libraries and is not included in this suite. The
+exploratory examples `issue_0.v` and `issue_31.v`, and the legacy unused theories
+`Patricia.v`, `Tac.v`, and `ZifyInt.v`, remain excluded as in the former build.
+The long-running pigeon-hole timing scripts in `benchmark` are not run by
+`dune runtest`.
+
+The standalone generators can also be built with Dune:
+
+```shell
+dune build src/gen_form.exe src/ILTP/main.exe
+```
+
+In the composed workspace, prefix these targets with `vendored/itauto/`.
 
 ## Usage
 

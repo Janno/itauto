@@ -1,0 +1,9 @@
+(rocq.theory
+ (name ItautoTests)
+ (theories Stdlib Cdcl))
+
+(alias
+ (name runtest)
+ (package coq-itauto)
+ (deps arith.vo btauto.vo comp.vo impl.vo modulo.vo no_test_lia.vo
+       no_test_lra.vo refl_bool.vo))

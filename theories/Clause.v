@@ -1,5 +1,5 @@
 (* Copyright 2023 Frédéric Besson <frederic.besson@inria.fr> *)
-Require Import Bool ZifyBool ZArith ZifyUint63 Uint63 Lia List.
+From Stdlib Require Import Bool ZifyBool ZArith ZifyUint63 Uint63 Lia List.
 Require Import Cdcl.Lib Cdcl.Syntax Cdcl.Lit.
 
 (* A clause is a list of literals.
